@@ -1,0 +1,39 @@
+package cn.sxt.oo;
+
+public class TestEquals{
+	public void main(String[] args) {
+		Animal a = new Animal();
+		a.shout();
+		
+		Animal d = new Dog();  //对象的转型，Dog子类自动转化为父类Animal ---------向上转型
+		Dog d2 = (Dog) d;         //编译器认为d就是Animal，只有在程序运行时jvm才知道是Dog，要使用Dog的方法，
+		                          //就必须要强制转回来,强制向下转型
+		d2.seeDoor();
+		d.seeDoor();            //编译器认为d还是Animal,所以只能调取Animal中的方法
+		animalCry(d);
+		Animal c = new Cat();
+		Dog d3 = (Dog)c;
+		d3.seeDoor();            //编译时能通过，运行时报错。类型转换错误，不是父子关系
+	}
+	static void animalCry(Animal a) {          //定义static方法，为了方便调用
+		a.shout();
+	}
+}
+	class Animal{
+		public void shout() {
+			System.out.println("哇咔咔");
+		}
+	}
+	class Dog extends Animal{
+		public void shout() {
+			System.out.println("汪汪汪");
+		}
+		public void seeDoor() {
+			System.out.println("看门");
+		}
+	}
+	class Cat extends Animal{
+		public void shout() {
+			System.out.println("喵喵喵");
+		}
+	}
